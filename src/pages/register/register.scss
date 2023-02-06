@@ -1,0 +1,16 @@
+.form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 600px;
+    min-width: 500px;
+    border: 1px solid black;
+    position: absolute;
+    top: 20%;
+    left: 30%;
+
+    input{
+        margin-top: 3px;
+        margin-bottom: 16px;
+    }
+}

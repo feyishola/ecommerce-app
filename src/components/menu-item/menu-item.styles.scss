@@ -1,0 +1,67 @@
+.menu-item{
+    min-width: 30%;
+    border: 1px solid black;
+    height: 240px;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 7.5px 15px;
+    overflow: hidden;
+    
+    &.large{
+        height: 380px;
+    }
+
+    &:first-child{
+        margin-right: 7.5px;
+    }
+
+    &:last-child{
+        margin-left: 7.5px;
+    }
+
+    &:hover{
+        cursor: pointer;
+        .background-image{
+            transform: scale(1.1);
+            transition: transform 6s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        .content{
+            opacity: 0.9;
+        }
+    }
+
+    .background-image{
+        width: 100%;
+        height: 100%;
+        background-position: center;
+        background-size: cover;
+        position: relative; // relative position is like assuming the parent position | the determinant
+    }
+
+    .content{
+        border: 1px solid black;
+        height: 90px;
+        padding: 0 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        opacity: 0.7;
+        position: absolute; // absolute position is like assuming the child position | the dependent
+    }
+
+    .title{
+        font-weight: bold;
+        margin-bottom: 6px;
+        font-size: 22px;
+        color:#4a4a4a
+    }
+
+    .subtitle{
+        font-weight: lighter;
+        font-size: 16px;
+    }
+}
