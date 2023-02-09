@@ -5,16 +5,17 @@ import BasicTable from "../../components/tables/table";
 import AddUser from "../adduser/adduser";
 
 const users = [
-    {label:"Users", key:"users"},
-    {label:"Emails", key:"email"}
+    {label:"Users", key:"userName"},
+    {label:"Emails", key:"email"},
+    {label:"User Category", key:"userCategory"}
 ]
 
 const contacts = [
-    {users:"first customer", email:"first@mail.com"},
-    {users:"second customer", email:"first@mail.com"},
-    {users:"third customer", email:"first@mail.com"},
-    {users:"fourth customer", email:"first@mail.com"},
-    {users:"fifth customer", email:"first@mail.com"}
+    {userName:"first customer", email:"first@mail.com", userCategory:"customer"},
+    {userName:"second customer", email:"first@mail.com", userCategory:"customer"},
+    {userName:"third customer", email:"first@mail.com", userCategory:"customer"},
+    {userName:"fourth customer", email:"first@mail.com", userCategory:"customer"},
+    {userName:"fifth customer", email:"first@mail.com", userCategory:"customer"}
 ]
 
 const Users = ()=>{

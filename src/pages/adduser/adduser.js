@@ -32,6 +32,9 @@ const AddUser = ()=>{
                 <div>User Email: </div>
                 <input type={"text"} name={"email"} value={user.email} onChange={handler} />
 
+                <div>Password: </div>
+                <input type={"password"} name={"password"} value={user.password} onChange={handler} />
+
                 <div></div>
                 <input type={"submit"} value={"create user"} />
             </form>

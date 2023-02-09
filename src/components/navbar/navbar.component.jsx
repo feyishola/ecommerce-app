@@ -9,16 +9,16 @@ const NavBar = ()=>{
         <nav>
             <ul>
                <li>
-                    <Link to={"/"}>Home</Link>
+                    <Link to={"/customer"}>Home</Link>
                 </li>
                 <li>
-                    <Link to={"/cart"}>Cart</Link>
+                    <Link to={"/customer/cart"}>Cart</Link>
                 </li>
                 <li>
-                    <Link to={"/order"}>Orders</Link>
+                    <Link to={"/customer/order"}>Orders</Link>
                 </li>
                 <li>
-                    <Link to={"/logout"}>Logout</Link>
+                    <Link to={"/customer/logout"}>Logout</Link>
                 </li>
             </ul>
         </nav>

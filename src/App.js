@@ -14,26 +14,36 @@ import AddUser from './pages/adduser/adduser';
 import ItemDetail from './pages/item-detail/itemdetails';
 
 
-function Test(props){
-  
-  return(
 
+function Test(props){
+//   const [state, setState] = useState([
+    
+// ]);
+// const store = createContext()
+   return(
+
+//     <store.Provider value={state}>
+//       <ItemDetail store={store}/>
+//     </store.Provider>
+    
     <div>
       <h1>Test drive</h1>
     </div>
   )
 }
 
+
 function App() {
   return (
     <div>
       <BrowserRouter>
         <Routes>
-            <Route path='/login' element={<Login/>}/>
-            <Route path='/register' element={<Register/>}/>
-            <Route path='/' element={<Layout/>}>
+            <Route path='/' element={<Login/>}>
+              <Route path='register' element={<Register/>}/>
+            </Route>
+            <Route path='/customer' element={<Layout/>}>
               <Route index element={<Homepage/>}/>
-              <Route path='detail/:id' element={<ItemDetail/>}/>
+              <Route path='detail' element={<ItemDetail/>}/>
               <Route path='cart' element={<Cart/>}/>
               <Route path='order' element={<Order/>}/>
               <Route path='logout' element={<Login/>}/>

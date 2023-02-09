@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, {createContext, useContext, useState} from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MenuItem from "../menu-item/menu-item.component";
 import './directory.styles.scss'
 
@@ -53,7 +53,16 @@ const Directory = ()=>{
         }
     ]);
 
+    // const value = useContext(DataContext)
 
+    // const {product} = value
+        
+    const navigate = useNavigate()
+
+    const detail =  (id,obj)=>{
+        // console.log(id,obj);
+        navigate(`/customer/detail?id=`+id, {state:{item:obj}});
+    }
 
     // useEffect(async ()=>{
     //     let products = await fetch('url.. to the backend');
@@ -64,16 +73,14 @@ const Directory = ()=>{
     
     
     return(
-        <div className="directory-menu">
-            {state.map(({productName,id, productImage, size})=>{
-               return (
-                        // <Link to={'/detail/:id'}>
-                            <MenuItem key={id} productName={productName} productImage={productImage} size={size}/>
-                        // </Link>
-               )
-               
-            })}
-        </div>
+            <div className="directory-menu">
+                {state.map(({productName,id, productImage, size})=>{
+                return (
+                        <MenuItem key={id} productName={productName} productImage={productImage} size={size} onClick={()=>detail(id,{id,productName,productImage})}/>
+                )
+                
+                })}
+            </div>
     )
 }
 
