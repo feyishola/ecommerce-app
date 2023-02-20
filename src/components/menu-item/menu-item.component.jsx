@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ButtonComp from "../button/button";
 import './menu-item.styles.scss'
 
-const MenuItem = ({productName, productImage, size,onClick})=>{
+const MenuItem = ({productName, productImage, productAmount, size,onClick})=>{
         
     return (
             <div className={` ${size} menu-item`} onClick={onClick}>

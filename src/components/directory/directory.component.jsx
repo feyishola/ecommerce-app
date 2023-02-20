@@ -14,7 +14,7 @@ const Directory = ()=>{
             productImage:"https://m.media-amazon.com/images/I/71UC5TkXixL._AC_UL1200_.jpg",
             productQuantity:1, 
             productCategory:'string', 
-            productAmount:1000,
+            productAmount:5000,
             id:1,
         },
         {
@@ -22,7 +22,7 @@ const Directory = ()=>{
             productImage:"https://www.rei.com/media/product/1768740051",
             productQuantity:1, 
             productCategory:'string', 
-            productAmount:1000,
+            productAmount:3000,
             id:2
         },
         {
@@ -38,7 +38,7 @@ const Directory = ()=>{
             productImage:"https://guardian.ng/wp-content/uploads/2022/12/Tobby-Lordwilliams-556x312.jpg",
             productQuantity:1, 
             productCategory:'string', 
-            productAmount:1000,
+            productAmount:6000,
             size:"large",
             id:4
         },
@@ -47,7 +47,7 @@ const Directory = ()=>{
             productImage:"https://glaminati.com/wp-content/uploads/2022/09/tp-best-mens-haircuts.jpg",
             productQuantity:1, 
             productCategory:'string', 
-            productAmount:1000,
+            productAmount:9000,
             size:"large",
             id:5
         }
@@ -74,9 +74,9 @@ const Directory = ()=>{
     
     return(
             <div className="directory-menu">
-                {state.map(({productName,id, productImage, size})=>{
+                {state.map(({productName,id, productImage, productAmount,size})=>{
                 return (
-                        <MenuItem key={id} productName={productName} productImage={productImage} size={size} onClick={()=>detail(id,{id,productName,productImage})}/>
+                        <MenuItem key={id} productName={productName} productImage={productImage} size={size} onClick={()=>detail(id,{id,productName,productImage,productAmount})}/>
                 )
                 
                 })}

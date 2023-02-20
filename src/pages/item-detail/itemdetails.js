@@ -1,19 +1,31 @@
 import { Button } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { json, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Counter, value } from "../../components/counter/counter";
 import MenuItem from "../../components/menu-item/menu-item.component";
 
 const ItemDetail = ()=>{
     const location = useLocation()
     const [params] = useSearchParams();
+    const [quantity,setQuantity] = useState(1);
 
+    const navigate = useNavigate()
     // const countValue = useContext(value)
 
     const id = params.get('id');
+
     const {item} = location.state || {};
 
     const [product, setProduct] = useState(item);
+
+    // const [state, setState] = useState(cartState)
+
+    const [cartState, setCartState] = useState(JSON.parse(localStorage.getItem('cartItems')) || []);
+    
+
+    // const updateQuantity=(quantity)=>{
+    //     setQuantity(quantity);
+    // }
 
     
     // useEffect(()=>{
@@ -22,6 +34,19 @@ const ItemDetail = ()=>{
     //         setProduct({productName:'Name gotten from database'});
     //     },1500);
     // },[id])
+
+    const addToCart = ()=>{
+        setCartState([...cartState, {...product, quantity}]);
+            
+        setTimeout(()=>{
+            navigate('/customer'); 
+        },500);
+    }
+
+    useEffect(()=>{
+        // alert('Added')
+        localStorage.setItem('cartItems', JSON.stringify(cartState));
+    },[cartState])
 
     if(!product){
         return <p>Loading...</p>
@@ -32,15 +57,12 @@ const ItemDetail = ()=>{
         <div>
             <MenuItem size={"large"} productImage={item.productImage} productName={item.productName}/>
         </div>
-        {/* <div style={{display:"flex", flexDirection:"column", justifyContent:"center",alignItems:"center",}}>
-            <p>{product.productName}</p>
-        </div> */}
-        <div style={{display:"flex", flexDirection:"row", justifyContent:"center",alignItems:"center",gap:"40px"}}>
-            <Counter/>
-            <Button variant="outlined" color="success" onClick={()=>{console.log(product)}}>{"add to cart"} </Button>
-        </div>
         <div style={{display:"flex", flexDirection:"column", justifyContent:"center",alignItems:"center",}}>
-            
+            <p>Cost/Product: {product.productAmount}</p>
+        </div>
+        <div style={{display:"flex", flexDirection:"row", justifyContent:"center",alignItems:"center",gap:"40px"}}>
+            <Counter update={setQuantity}/>
+            <Button variant="outlined" color="success" onClick={addToCart}>{"add to cart"} </Button>
         </div>
     </div>
     
