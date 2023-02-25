@@ -12,6 +12,7 @@ import Users from './pages/users/users';
 import AddProduct from './pages/addproduct/addproduct';
 import AddUser from './pages/adduser/adduser';
 import ItemDetail from './pages/item-detail/itemdetails';
+import Testtable from './components/tables/test';
 
 
 
@@ -38,9 +39,9 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-            <Route path='/' element={<Login/>}>
-              <Route path='register' element={<Register/>}/>
-            </Route>
+          {/* <Route path='/table' element={<Testtable/>}/> */}
+            <Route path='/' element={<Login/>}/>
+              <Route path='/register' element={<Register/>}/>
             <Route path='/customer' element={<Layout/>}>
               <Route index element={<Homepage/>}/>
               <Route path='detail' element={<ItemDetail/>}/>

@@ -1,5 +1,7 @@
 import React, { useState } from "react"; 
 import { useNavigate } from "react-router-dom";
+import ButtonComp from "../../components/button/button";
+import { requestApi } from "../../logic/client_api/client";
 // import Form from "../../components/forms/form";
 import "./login.scss"
 
@@ -9,17 +11,29 @@ const Login = ()=>{
 
     const [loginDetails, setLoginDetails] = useState({})
 
-    // const [error, setError] = useState(false)
+    const [response, setResponse] = useState()
 
     const HandleSubmit = (e)=>{
         e.preventDefault();
-        if(loginDetails.username == "admin"){
+        console.log(loginDetails);
+        requestApi('/api/v1/user/login',"POST","",loginDetails)
+        .then(res=>{
+            console.log(res);
+            if(res.response == 'ok'){
+                localStorage.setItem("token",JSON.stringify(res.payload.token))
 
-            console.log(loginDetails);
-            localStorage.setItem("userdetails",JSON.stringify(loginDetails))
-            navigate('/customer')
-        }
+                setTimeout(()=>{
 
+                    navigate('/customer')
+                },500)
+            }else{
+                setResponse(res.payload)
+            }
+
+        })
+        .catch(err=>{
+            setResponse(err.message)
+        })
     }
 
     const HandleFormInput = (e)=>{
@@ -29,17 +43,22 @@ const Login = ()=>{
     }
 
     return(
-        <div className="form">
-            <form onSubmit={HandleSubmit}>
-                <label>Username:
-                    <input type={"text"} value={loginDetails.username} name={"username"} onChange={HandleFormInput} />
-                </label><br/>
-                <label>Password:
-                    <input type={"text"} value={loginDetails.password} name={"password"} onChange={HandleFormInput}/>
-                </label><br/>
-                <input type={"submit"} value={"submit"}/>
-            </form>
-            
+        <div>
+            <div className="form">
+                <form onSubmit={HandleSubmit}>
+                    <label>Email:
+                        <input type={"email"} value={loginDetails.email} name={"email"} onChange={HandleFormInput} style={{height:"30px"}}/>
+                    </label><br/>
+                    <label>Password:
+                        <input type={"text"} value={loginDetails.password} name={"password"} onChange={HandleFormInput} style={{height:"30px"}}/>
+                    </label><br/>
+                    <input type={"submit"} value={"submit"} style={{width:"150px", height:"30px", marginLeft:"35%", backgroundColor:"green"}}/>
+                    {response?<p style={{color:"red", margin:"2px"}}>{response}</p>:""}
+                </form>
+                <div style={{marginBottom:"10px"}}/>
+                {"Dont have an account? pls register here"}<ButtonComp size={"large"} buttonValue={"Register"} onClick={()=>{navigate('/register')}}/>
+
+            </div>
         </div>
     )
 }

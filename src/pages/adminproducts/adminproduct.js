@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ModalButton from "../../components/modal/modal";
 import BasicTable from "../../components/tables/table";
+import { requestApi } from "../../logic/client_api/client";
 import AddProduct from "../addproduct/addproduct";
 
 
@@ -29,16 +30,33 @@ import AddProduct from "../addproduct/addproduct";
   
 
 const AdminProduct = ()=>{
+
+  const [products, setProducts] = useState([])
+
+  useEffect(()=>{
+
+    const token = JSON.parse(localStorage.getItem('token') || '')
+
+    requestApi('/api/v1/product',"GET",token)
+    .then(res=>{
+      const prods = res.payload
+      setProducts(prods)
+      
+    })
+    .catch(err=>{
+      console.log(err.message);
+    })
+  },[])
     return(
         
         <div className="homepage">
             <div style={{marginLeft:"80%"}}>
-              
+            {console.log("admin produts", products)}
               <Link to={'/admin/addproduct'}>
                 <ModalButton form={<AddProduct/>} title={"add product"}/>
               </Link>
             </div>
-            <BasicTable columns={tableHeaders} rows={rows} />
+            <BasicTable columns={tableHeaders} rows={products} />
         </div>
     )
 }

@@ -1,18 +1,19 @@
 import { Button } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
-import { json, useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { Counter, value } from "../../components/counter/counter";
+import React, { useEffect, useState } from "react";
+import {  useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { Counter} from "../../components/counter/counter";
 import MenuItem from "../../components/menu-item/menu-item.component";
 
 const ItemDetail = ()=>{
     const location = useLocation()
     const [params] = useSearchParams();
     const [quantity,setQuantity] = useState(1);
+    const [totalAmount, setTotalAmount] = useState(0)
 
     const navigate = useNavigate()
     // const countValue = useContext(value)
 
-    const id = params.get('id');
+    // const id = params.get('id');
 
     const {item} = location.state || {};
 
@@ -36,8 +37,10 @@ const ItemDetail = ()=>{
     // },[id])
 
     const addToCart = ()=>{
-        setCartState([...cartState, {...product, quantity}]);
-            
+        const t= product.productAmount * quantity;
+        setTotalAmount(t)
+        setCartState([...cartState, {...product, quantity, totalAmount:t}]);
+        
         setTimeout(()=>{
             navigate('/customer'); 
         },500);
@@ -45,7 +48,10 @@ const ItemDetail = ()=>{
 
     useEffect(()=>{
         // alert('Added')
+        
         localStorage.setItem('cartItems', JSON.stringify(cartState));
+        console.log("testing total amount",cartState);
+        
     },[cartState])
 
     if(!product){

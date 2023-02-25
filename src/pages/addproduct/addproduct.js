@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { requestApi } from "../../logic/client_api/client";
 import "./addproduct.scss"
 
 
@@ -11,6 +12,16 @@ const AddProduct = ()=>{
 
     const HandleSubmit = (event)=>{
         event.preventDefault()
+
+        const token = JSON.parse(localStorage.getItem('token') || '')
+
+        requestApi('/api/v1/product',"POST",token,product)
+        .then(res=>{
+            console.log(res);
+        }).catch(err=>{
+            console.log(err.message);
+        })
+
         console.log(product);
         navigate(-1)
     }
@@ -25,19 +36,19 @@ const AddProduct = ()=>{
         <div className="form">
             <form onSubmit={HandleSubmit}>
                     <div>product:</div>
-                        <input type={"text"} name={"productName"} value={product.productName} onChange={HandleUserDetails}/><br/>
+                        <input type={"text"} name={"productName"} value={product.productName ||''} onChange={HandleUserDetails}/><br/>
                     
                     <div>product Category:</div>
-                        <input type={"text"} name={"productCategory"} value={product.productCategory} onChange={HandleUserDetails}/><br/>
+                        <input type={"text"} name={"productCategory"} value={product.productCategory || ''} onChange={HandleUserDetails}/><br/>
                     
                     <div>Amount:</div>
-                        <input type={"text"} name={"productAmount"} value={product.productAmount} onChange={HandleUserDetails}/><br/>
+                        <input type={"text"} name={"productAmount"} value={product.productAmount  || ''} onChange={HandleUserDetails}/><br/>
                     
                     <div>Quantity:</div>
-                        <input type={"text"} name={"productQuantity"} value={product.productQuantity} onChange={HandleUserDetails}/><br/>
+                        <input type={"text"} name={"productQuantity"} value={product.productQuantity  || ''} onChange={HandleUserDetails}/><br/>
 
                     <div>Image:</div>
-                        <input type={"text"} name={"productImage"} value={product.productImage} onChange={HandleUserDetails}/><br/>
+                        <input type={"text"} name={"productImage"} value={product.productImage  || ''} onChange={HandleUserDetails}/><br/>
                     
                     <input type={"submit"} value={"add product"}/>
             </form>

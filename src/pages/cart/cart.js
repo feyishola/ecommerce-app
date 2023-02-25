@@ -42,7 +42,7 @@ const Cart = ()=>{
         <div className="homepage">
             <BasicTable columns={tableHead} rows={products} />
             <div style={{marginTop:"15px"}}/>
-            <ButtonComp buttonValue={"Order"}/>
+            <ButtonComp buttonValue={"Order"} onClick={()=>{console.log("orders object", products);}}/>
             
         </div>
         
