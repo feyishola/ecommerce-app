@@ -83,7 +83,7 @@ const AdminProduct = ()=>{
         
         <div className="homepage">
             <div style={{marginLeft:"80%"}}>
-            {console.log("admin produts", products)}
+            {/* {console.log("admin produts", products)} */}
               <Link to={'/admin/addproduct'}>
                 <ModalButton form={<AddProduct/>} title={"add product"}/>
               </Link>
